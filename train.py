@@ -162,7 +162,7 @@ def main():
     best_jac = 0.0
 
     # ############ Start the training
-    for epoch in range(44,EPOCH):
+    for epoch in range(EPOCH):
         stime = datetime.datetime.now()
 
         train_loss_D = []
