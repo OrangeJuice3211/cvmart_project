@@ -126,17 +126,15 @@ def main():
     #     model, optimizer = amp.initialize(model, optimizer, opt_level="O1")
     model = torch.nn.DataParallel(model)
 
-    # # ############ Load pretrained weights
-    # pretrained_dict = torch.load(model_urls['deeplabv3plus_xception'])
-    # net_dict = model.state_dict()
-    # pretrained_dict = {k: v for k, v in pretrained_dict.items() if (k in net_dict) and (v.shape == net_dict[k].shape)}
-    # net_dict.update(pretrained_dict)
-    # model.load_state_dict(net_dict)
+    # ############ Load pretrained weights
+    pretrained_dict = torch.load(model_urls['deeplabv3plus_xception'])
+    net_dict = model.state_dict()
+    pretrained_dict = {k: v for k, v in pretrained_dict.items() if (k in net_dict) and (v.shape == net_dict[k].shape)}
+    net_dict.update(pretrained_dict)
+    model.load_state_dict(net_dict)
 
-    # print(len(net_dict))
-    # print(len(pretrained_dict))
-    pretrained_dict = torch.load('/project/train/models/skin16/best_epoch_44.pth')
-    model.load_state_dict(pretrained_dict)
+    print(len(net_dict))
+    print(len(pretrained_dict))
 
     model.train()
     model.float()
